@@ -25,7 +25,7 @@ export const signin = async (req, res, next) => {
     const isCorrect = await bcrypt.compare(req.body.password, user.password);
     if (!isCorrect) return next(cerateError(400, "Wrong Credentials"));
     const { password, ...others } = user._doc;
-    const token = jwt.sign({ id: user._id }, process.env.JWT);
+    const token = jwt.sign({ id: user._id }, "djbsakab szxbcbakbcjncjonwacnal");
     res
       .cookie("access_token", token, {
         httpOnly: true,

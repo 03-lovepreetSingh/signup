@@ -40,7 +40,7 @@ app.use((err, req, res, next) => {
     message,
   });
 });
-app.listen(process.env.PORT, () => {
+app.listen(3000, () => {
   connect();
   console.log("Connected to Server");
 });
