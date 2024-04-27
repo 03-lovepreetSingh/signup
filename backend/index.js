@@ -13,7 +13,13 @@ const connect = () => {
     console.log("Connected to Database");
   });
 };
-app.use(cors());
+app.use(
+  cors({
+    origin: ["https://signup-backend-steel.vercel.app/"],
+    methods: ["POST", "GET"],
+    credentials: true,
+  })
+);
 app.use(cookieParser());
 app.use(express.json());
 app.use("/api/auth", authRoutes);
