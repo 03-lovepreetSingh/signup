@@ -9,24 +9,11 @@ import cors from "cors";
 const app = express();
 dotenv.config();
 const connect = () => {
-  mongoose
-    .connect(
-      "mongodb+srv://love:love@cluster0.8cz0ggr.mongodb.net/?retryWrites=true&w=majority&appName=Cluster0"
-    )
-    .then(() => {
-      console.log("Connected to Database");
-    });
+  mongoose.connect(process.env.MONGO).then(() => {
+    console.log("Connected to Database");
+  });
 };
-app.use(
-  cors({
-    origin: ["https://signup-backend-steel.vercel.app/"],
-    methods: ["POST", "GET"],
-    credentials: true,
-  })
-);
-app.get("/", (req, res) => {
-  res.json("hello");
-});
+app.use(cors());
 app.use(cookieParser());
 app.use(express.json());
 app.use("/api/auth", authRoutes);
@@ -40,7 +27,7 @@ app.use((err, req, res, next) => {
     message,
   });
 });
-app.listen(3000, () => {
+app.listen(process.env.PORT, () => {
   connect();
   console.log("Connected to Server");
 });
